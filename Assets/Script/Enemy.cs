@@ -8,20 +8,35 @@ public class Enemy : MonoBehaviour
     public PlayerController playerController;
     public Image HPbar;
     public TextMeshProUGUI HPText;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once before the first execution of Update after the MonoBehaviour is create
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void DetectHealth()
     {
         if (hp <= 0)
         {
             Destroy(gameObject);
         }
-        HPText.text=hp.ToString();
+        HPText.text = hp.ToString();
+    }
+    public virtual void Move()
+    {
+
+
+    }
+    public virtual void Attack()
+    {
+
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        DetectHealth();
+        Move();
+        Attack();
     }
 
     private void OnTriggerEnter(Collider other)

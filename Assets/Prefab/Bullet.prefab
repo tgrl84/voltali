@@ -50,6 +50,7 @@ MonoBehaviour:
   speed: 50
   lifetime: 5
   damage: 1
+  tagDestroy: Player
 --- !u!54 &3225314618959445343
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -199,3 +200,4 @@ MonoBehaviour:
   speed: 50
   lifetime: 5
   damage: 1
+  tagDestroy: 
