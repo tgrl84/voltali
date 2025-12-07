@@ -5,7 +5,6 @@ public class Bullet : MonoBehaviour
     public float speed = 20f;
     public float lifetime = 5f; 
     public float damage = 1f;
-    [SerializeField] string tagDestroy = "Player";
 
     void Start()
     {
@@ -14,7 +13,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == tagDestroy) return;
+        if (other.gameObject.tag == "Player") return;
         Destroy(gameObject);
     }
 

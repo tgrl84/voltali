@@ -34,7 +34,7 @@ public class CommonEnemy : Enemy
         firePoint = transform;
         StartCoroutine(ShootIntervale(1));
     }
-    public override void DetectHealth()
+    public void DetectHealth()
     {
         if (hp <= 0)
         {
@@ -42,7 +42,7 @@ public class CommonEnemy : Enemy
         }
         HPText.text = hp.ToString();
     }
-    public override void Move()
+    public void Move()
     {
         var rgd = GetComponent<Rigidbody>();
         if (transform.position == _left.position)
@@ -58,7 +58,7 @@ public class CommonEnemy : Enemy
         rgd.AddForce(direction * _pouissance);
     }
 
-    public override void Attack()
+    public void Attack()
     {
 
     }

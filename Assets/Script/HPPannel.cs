@@ -1,21 +1,26 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HPPannel : MonoBehaviour
 {
     public Sprite[] sprites;
-    public PlayerController player; // référence au joueur
+    public PlayerController player;
     public Image self;
+
     void Start()
     {
         self.sprite = sprites[5];
     }
+
     void Update()
     {
         if (player)
         {
-            self.sprite = sprites[player.hp];
+            // transforme 0-20 HP â†’ index 0-5
+            int index = Mathf.Clamp(Mathf.FloorToInt(player.hp / 4f), 0, 5);
+
+            self.sprite = sprites[index];
         }
     }
 }

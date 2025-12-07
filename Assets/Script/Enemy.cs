@@ -8,13 +8,8 @@ public class Enemy : MonoBehaviour
     public PlayerController playerController;
     public Image HPbar;
     public TextMeshProUGUI HPText;
-    // Start is called once before the first execution of Update after the MonoBehaviour is create
-    void Start()
-    {
-        
-    }
 
-    public virtual void DetectHealth()
+    void Update()
     {
         if (hp <= 0)
         {
@@ -22,31 +17,22 @@ public class Enemy : MonoBehaviour
         }
         HPText.text = hp.ToString();
     }
-    public virtual void Move()
-    {
-
-
-    }
-    public virtual void Attack()
-    {
-
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        DetectHealth();
-        Move();
-        Attack();
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Bullet")
+        // --- Balle normale ---
+        if (other.gameObject.CompareTag("Bullet"))
         {
-            Debug.Log("hit !");
-            hp = hp - (1f * playerController.multiplier * playerController.multicount);
+            Debug.Log("Hit normal bullet !");
+            hp -= 1f * playerController.multiplier * playerController.multicount;
             playerController.multiplier = 1f;
         }
+
+        // --- Bombe (explosion centrale) ---
+        if (other.gameObject.CompareTag("Bomb"))
+        {
+            Debug.Log("Hit by bomb center !");
+            hp -= 10f; // dégâts de la bombe
+        }
     }
-    
 }

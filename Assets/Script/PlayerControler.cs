@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float bulletSpeed = 20f;
+    public bool BombShoot = false; 
+    public BombLauncherUpgrade BShoot; 
+
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -27,13 +30,19 @@ public class PlayerController : MonoBehaviour
     public int bulletNumber;
     public float multiplier = 1f;
     public int multicount = 1;
-    public int hp = 5;
+    public float hp = 5;
 
     private bool canRotate = true;
     public bool isReloading = false;
     public BulletTrack bulletTrack;
+
+    private void Start(){
+        BShoot.bombPrefab = bulletPrefab; 
+    }
+
     private void Awake()
     {
+      
         controller = GetComponent<CharacterController>();
     }
 
@@ -124,10 +133,16 @@ public class PlayerController : MonoBehaviour
         }
 
         // --- Tir ---
-        if (fireInput && bulletNumber>0)
+        if (fireInput && bulletNumber>0) 
         {
-            Shoot();
-            bulletNumber--;
+            if (BombShoot) { 
+                BShoot.ShootBomb(); 
+                bulletNumber--; 
+            }
+            else {
+                Shoot();
+                bulletNumber--;
+            } 
             
             fireInput = false;
         }
