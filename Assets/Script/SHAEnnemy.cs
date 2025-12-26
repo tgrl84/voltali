@@ -2,11 +2,10 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
-public class KamikazeDroneEnemy : MonoBehaviour
+public class SHAEnnemy : Enemy
 {
     [Header("Cible")]
     private Transform player;
-
 
     [Header("Déplacement")]
     public float moveSpeed = 4f;
@@ -133,7 +132,10 @@ public class KamikazeDroneEnemy : MonoBehaviour
                 }
             }
         }
-
+        if (collectiblePrefab)
+            {
+                GameObject loot = Instantiate(collectiblePrefab, transform.position, Quaternion.identity);
+            }
         Destroy(gameObject);
     }
 

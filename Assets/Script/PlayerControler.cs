@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     private Vector3 velocity;
     private bool isGrounded;
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip gunClip;
 
     private Vector2 moveInput;
     private bool jumpInput;
@@ -36,7 +39,7 @@ public class PlayerController : MonoBehaviour
     public float multiplier = 1f;
     public int multicount = 1;
     public int hp = 5;
-
+    public float dmg = 1f;
     public bool TriShotGun=false;
     private bool canRotate = true;
     public bool isReloading = false;
@@ -169,7 +172,11 @@ public class PlayerController : MonoBehaviour
     private IEnumerator FireRoutine()
     {
         canShoot = false;
-
+        if (gunClip && audioSource) { 
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            audioSource.PlayOneShot(gunClip);
+            audioSource.pitch = 1f;
+        }
         if (TriShotGun)
         {
             yield return StartCoroutine(TriShotRoutine());

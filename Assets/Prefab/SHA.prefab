@@ -109,8 +109,8 @@ BoxCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.9999999, y: 8.460618, z: 0.9999999}
+  m_Center: {x: 0, y: 3.7303092, z: 0}
 --- !u!114 &6445525765280684746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4204723d129d3e458cef529059d2777, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 1
+  playerController: {fileID: 0}
+  HPbar: {fileID: 0}
+  collectiblePrefab: {fileID: 4690668973156940679, guid: 48566c7efba762c42a5d7046a738de0e, type: 3}
+  HPText: {fileID: 0}
   moveSpeed: 5
   rotationSpeed: 4
   stopDistance: 2.5

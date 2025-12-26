@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public float hp = 5f;
     public PlayerController playerController;
     public Image HPbar;
+    public GameObject collectiblePrefab;
     public TextMeshProUGUI HPText;
     // Start is called once before the first execution of Update after the MonoBehaviour is create
     void Start()
@@ -16,10 +17,6 @@ public class Enemy : MonoBehaviour
 
     public virtual void DetectHealth()
     {
-        if (hp <= 0)
-        {
-            Destroy(gameObject);
-        }
         HPText.text = hp.ToString();
     }
     public virtual void Move()
@@ -44,9 +41,22 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.tag == "Bullet")
         {
             Debug.Log("hit !");
-            hp = hp - (1f * playerController.multiplier * playerController.multicount);
+            hp -= playerController.dmg * playerController.multiplier * playerController.multicount;
             playerController.multiplier = 1f;
+
+            if (hp <= 0)
+                Die();
         }
     }
-    
+
+    private void Die()
+    {
+        if (collectiblePrefab)
+        {
+            Vector3 spawnPos = transform.position + Vector3.up * 0.5f;
+            Instantiate(collectiblePrefab, spawnPos, Quaternion.identity);
+        }
+        Destroy(gameObject);
+    }
+
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -28,6 +29,7 @@ public class QTEManager : MonoBehaviour
     public AudioClip successClip;
     public AudioClip failClip;
     public AudioClip successStepClip;
+    private float pitch=0.2f;
 
     [Header("Gameplay Settings")]
     public int easyLength = 3;
@@ -160,7 +162,9 @@ public class QTEManager : MonoBehaviour
             {
                 // Jouer le son de réussite partielle
                 if (successStepClip && audioSource)
+                    audioSource.pitch = pitch;
                     audioSource.PlayOneShot(successStepClip);
+                    pitch += 0.2f;
 
                 // Feedback visuel
                 if (currentIndex < arrows.Length && arrows[currentIndex] != null)
@@ -173,7 +177,9 @@ public class QTEManager : MonoBehaviour
 
                 if (currentIndex >= sequence.Count)
                 {
+                    audioSource.pitch = 1f;
                     QTESuccess();
+                    pitch = 0.2f;
                 }
             }
             else

@@ -5,6 +5,7 @@ public class Spawner : MonoBehaviour
 {
     [Header("Spawn")]
     public Transform player;
+    public PlayerController playerController;
     public GameObject SHAPrefab;
     public Transform spawnPoint;
 
@@ -34,9 +35,10 @@ public class Spawner : MonoBehaviour
         GameObject drone = Instantiate(SHAPrefab, spawnPoint.position, spawnPoint.rotation);
         currentDrones++;
 
-        KamikazeDroneEnemy enemy = drone.GetComponent<KamikazeDroneEnemy>();
+        SHAEnnemy enemy = drone.GetComponent<SHAEnnemy>();
         if (enemy != null)
         {
+            enemy.playerController = playerController;
             enemy.SetTarget(player);
         }
 

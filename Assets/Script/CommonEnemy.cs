@@ -38,7 +38,7 @@ public class CommonEnemy : Enemy
     {
         if (hp <= 0)
         {
-            GameManager.AddScore(10);
+            GameManager.AddScore(30);
             GameManager.EnemyNumber--;
             Destroy(gameObject);
         }
