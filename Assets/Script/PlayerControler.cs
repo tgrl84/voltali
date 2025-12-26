@@ -6,15 +6,23 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
     public QTEManager manager;
+    public GameManager gameManager;
     [Header("Mouvement")]
     public float speed = 5f;
     public float jumpHeight = 2f;
     public float gravity = -9.81f;
-
+    [Header("Knockback")]
+    public float knockbackForce = 8f;
+    private Vector3 knockbackVelocity;
     [Header("Tir")]
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float bulletSpeed = 20f;
+    [Header("Cooldown Tir")]
+    public float fireCooldown = 0.4f; // délai entre chaque balle
+    private bool canShoot = true;
+
+    public int nbSteel = 3;
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -29,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public int multicount = 1;
     public int hp = 5;
 
+    public bool TriShotGun=false;
     private bool canRotate = true;
     public bool isReloading = false;
     public BulletTrack bulletTrack;
@@ -42,7 +51,22 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.gameObject.tag == "BulletEnemy" || other.gameObject.tag == "Enemy")
+        {
+            hp--;
 
+        }
+        if (hp < 0) { hp = 0; }
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+            new WaitForSeconds(2f);
+            Time.timeScale = 0;
+        }
+    }
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -62,12 +86,20 @@ public class PlayerController : MonoBehaviour
 
     public void OnReload(InputAction.CallbackContext context)
     {
-        if (context.started && !isReloading)
+        if (context.started && !isReloading && nbSteel>0)
         {
             StartCoroutine(DoReloadQTE());
         }
     }
-
+    void ReloadWeapon()
+    {
+        bulletTrack.spin = 180;
+        bulletTrack.Spin();
+        bulletNumber = manager.nb_bullet_reload; // ou ton max
+        manager.nb_bullet_reload = 0;
+        nbSteel--;
+        Debug.Log("Arme rechargée !");
+    }
     private IEnumerator DoReloadQTE()
     {
         isReloading = true;
@@ -94,11 +126,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        
         // --- Death ---
-        if (hp<=0)
-        {
-            Destroy(gameObject);
-        }
+
         // --- Mouvement ---
         isGrounded = controller.isGrounded;
         if (isGrounded && velocity.y < 0)
@@ -116,6 +146,12 @@ public class PlayerController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
+        if (knockbackVelocity.magnitude > 0.1f)
+        {
+            controller.Move(knockbackVelocity * Time.deltaTime);
+            knockbackVelocity = Vector3.Lerp(knockbackVelocity, Vector3.zero, 8f * Time.deltaTime);
+        }
+
         // --- Rotation pour viser ---
         if (lookInput.sqrMagnitude > 0.1f && canRotate)
         {
@@ -124,15 +160,30 @@ public class PlayerController : MonoBehaviour
         }
 
         // --- Tir ---
-        if (fireInput && bulletNumber>0)
+        if (fireInput && bulletNumber > 0 && canShoot && !isReloading)
         {
-            Shoot();
-            bulletNumber--;
-            
+            StartCoroutine(FireRoutine());
             fireInput = false;
         }
     }
+    private IEnumerator FireRoutine()
+    {
+        canShoot = false;
 
+        if (TriShotGun)
+        {
+            yield return StartCoroutine(TriShotRoutine());
+        }
+        else
+        {
+            Shoot();
+        }
+
+        bulletNumber--;
+
+        yield return new WaitForSeconds(fireCooldown);
+        canShoot = true;
+    }
     private void Shoot()
     {
         if (bulletPrefab && firePoint)
@@ -144,19 +195,39 @@ public class PlayerController : MonoBehaviour
                 rb.linearVelocity = firePoint.forward * bulletSpeed;
         }
     }
-    
+    public float spreadAngle = 15f;
 
-    private void ReloadWeapon()
+    private IEnumerator TriShotRoutine()
     {
-        bulletTrack.spin = 180;
-        bulletTrack.Spin();
-        bulletNumber = manager.nb_bullet_reload; // ou ton max
-        manager.nb_bullet_reload = 0;
-        Debug.Log("Arme rechargée !");
+        ShootBullet(0f);
+        yield return new WaitForSeconds(0.1f);
+
+        ShootBullet(-spreadAngle);
+        yield return new WaitForSeconds(0.1f);
+
+        ShootBullet(+spreadAngle);
     }
-    private void OnTriggerEnter(Collider other)
+
+    private void ShootBullet(float angleOffset)
     {
-        if (other.gameObject.tag == "Enemy") hp--;
+        Quaternion rot = firePoint.rotation * Quaternion.Euler(0f, 0f, angleOffset);
+
+        // Spawn légèrement en avant pour éviter que la balle touche le joueur
+        Vector3 spawnPos = firePoint.position + firePoint.forward * 0.3f;
+
+        GameObject bullet = Instantiate(bulletPrefab, spawnPos, rot);
+
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        rb.linearVelocity = bullet.transform.forward * bulletSpeed;
+    }
+
+    public void ApplyKnockback(Vector3 direction, float force)
+    {
+        knockbackVelocity = direction.normalized * force;
     }
 }
+
+
+    
+
 

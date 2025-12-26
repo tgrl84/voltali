@@ -9,13 +9,18 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        Destroy(gameObject, lifetime);
+        //Destroy(gameObject, lifetime);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (gameObject.tag == "BulletEnemy" && other.gameObject.tag == "Player")
+        {
+            //Destroy(gameObject);
+            return;
+        }
         if (other.gameObject.tag == tagDestroy) return;
-        Destroy(gameObject);
+            Destroy(gameObject);
     }
 
 }

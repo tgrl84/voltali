@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CommonEnemy : Enemy
 {
+    public GameManager GameManager;
     public Transform _left;
     public Transform _right;
     private Transform _current;
@@ -19,7 +20,6 @@ public class CommonEnemy : Enemy
             Vector3 direction = playerController.transform.position - transform.position;
             var look = Quaternion.LookRotation(direction);
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, look);
-
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             if (rb != null)
                 rb.linearVelocity = bullet.transform.forward * bulletSpeed;
@@ -38,6 +38,8 @@ public class CommonEnemy : Enemy
     {
         if (hp <= 0)
         {
+            GameManager.AddScore(10);
+            GameManager.EnemyNumber--;
             Destroy(gameObject);
         }
         HPText.text = hp.ToString();

@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6539844135095342303, guid: 805e7f3543af57e4ba5a2a3b07d64884, type: 3}
       propertyPath: m_TagString
-      value: Undefined
+      value: BulletEnemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
