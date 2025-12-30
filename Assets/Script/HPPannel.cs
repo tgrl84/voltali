@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class HPPannel : MonoBehaviour
@@ -11,11 +12,9 @@ public class HPPannel : MonoBehaviour
     {
         self.sprite = sprites[5];
     }
-    void Update()
+
+    public void updatePlayerHealthUI(int hp)
     {
-        if (player)
-        {
-            self.sprite = sprites[player.hp];
-        }
+        self.sprite = sprites[hp];
     }
 }

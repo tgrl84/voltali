@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is create
     void Start()
     {
-        
+        playerController = FindAnyObjectByType<PlayerController>();
     }
 
     public virtual void DetectHealth()
@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
             Die();
         // update health display
         HPText.text = hp.ToString();
-        HPbar.fillAmount = hp / 5f;
+        //HPbar.fillAmount = hp / 5f;
 
     }
     protected virtual void Die()

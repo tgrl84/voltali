@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
     private bool canRotate = true;
     public bool isReloading = false;
     public BulletTrack bulletTrack;
+    private bool isInvulnerable = false;
+    public float invulnerabilityDuration = 0.1f; // Durée en secondes
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -54,13 +56,23 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = context.ReadValue<Vector2>();
     }
+
+
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (other.gameObject.tag == "BulletEnemy")
+        if (other.gameObject.tag == "BulletEnemy" && !isInvulnerable)
         {
             OnTakeDamage(1);
+            Destroy(other.gameObject);
+            StartCoroutine(InvulnerabilityCoroutine());
         }
+    }
+
+    private IEnumerator InvulnerabilityCoroutine()
+    {
+        isInvulnerable = true;
+        yield return new WaitForSeconds(invulnerabilityDuration);
+        isInvulnerable = false;
     }
 
     public void OnTakeDamage(int damage)
@@ -71,6 +83,7 @@ public class PlayerController : MonoBehaviour
             hp = 0;
             Die();
         }
+        HudController.Instance.HPPannel.updatePlayerHealthUI(hp);
     }
 
     public void Die()

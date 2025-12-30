@@ -2021,7 +2021,7 @@ GameObject:
   - component: {fileID: 6090359999925805109}
   m_Layer: 0
   m_Name: Oppenheimer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2116,6 +2116,8 @@ MonoBehaviour:
   explosionDamage: 2
   explosionDelay: 3
   explosionForce: 10
+  explosionPrefab: {fileID: 0}
+  explosionSound: {fileID: 0}
   explosionZoneVisual: {fileID: 6492533592085363725}
   blinkSpeed: 8
 --- !u!1 &6438422602210394267
