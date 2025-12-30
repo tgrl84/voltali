@@ -67,7 +67,8 @@ public class PlayerController : MonoBehaviour
     {
         hp -= damage;
         if (hp <= 0)
-        {
+        { 
+            hp = 0;
             Die();
         }
     }

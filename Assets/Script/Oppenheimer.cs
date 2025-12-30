@@ -1,22 +1,25 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Oppenheimer : Enemy
 {
-    [Header("Cible")]
     private Transform player;
 
-    [Header("Déplacement")]
+    [Header("DÃ©placement")]
     public float moveSpeed = 4f;
     public float rotationSpeed = 6f;
-    public float stopDistance = 2.5f;
+    public float explosionTriggerDistance = 2.5f;
 
     [Header("Explosion")]
     public float explosionRadius = 3f;
     public int explosionDamage = 2;
-    public float explosionDelay = 1f;
+    public float explosionDelay = 3f;
     public float explosionForce = 10f;
+    public GameObject explosionPrefab;
+    public GameObject explosionSound;
 
     [Header("Zone Visuelle")]
     public GameObject explosionZoneVisual;
@@ -24,57 +27,52 @@ public class Oppenheimer : Enemy
 
     private Rigidbody rb;
     private bool isExploding = false;
-    private Renderer zoneRenderer;
+
+    private void Awake()
+    {
+        hp = 8f;
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        if (explosionZoneVisual)
+            explosionZoneVisual.SetActive(false);
+    }
 
     public void SetTarget(Transform target)
     {
         player = target;
     }
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-
-        if (explosionZoneVisual)
-        {
-            explosionZoneVisual.SetActive(false);
-            zoneRenderer = explosionZoneVisual.GetComponentInChildren<Renderer>();
-        }
-    }
 
     private void FixedUpdate()
     {
-        if (!player || isExploding) return;
+        if (!player)
+        {
+            var go = GameObject.FindGameObjectWithTag("Player");
+            if (go != null)
+                player = go.transform;
+            if (!player) return;
+        }
+        if (isExploding) return;
 
         float distance = Vector3.Distance(transform.position, player.position);
 
-        if (distance > stopDistance)
-            FollowPlayer();
+        if (distance > explosionTriggerDistance)
+        {
+            MoveTowardsPlayer();
+        }
         else
-            StopAndExplode();
+        {
+            rb.linearVelocity = Vector3.zero;
+            StartCoroutine(ExplosionRoutine());
+        }
     }
 
-    private void FollowPlayer()
+    private void MoveTowardsPlayer()
     {
         Vector3 direction = player.position - transform.position;
         direction.y = 0f;
-
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            targetRotation,
-            rotationSpeed * Time.fixedDeltaTime
-        );
-
+        Quaternion targetRot = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.fixedDeltaTime);
         rb.linearVelocity = transform.forward * moveSpeed;
-    }
-
-    private void StopAndExplode()
-    {
-        rb.linearVelocity = Vector3.zero;
-
-        if (!isExploding)
-            StartCoroutine(ExplosionRoutine());
     }
 
     private IEnumerator ExplosionRoutine()
@@ -84,58 +82,65 @@ public class Oppenheimer : Enemy
         if (explosionZoneVisual)
         {
             explosionZoneVisual.SetActive(true);
-
+            explosionZoneVisual.transform.localScale = Vector3.one * explosionRadius * 4f;
         }
 
         float timer = 0f;
-
         while (timer < explosionDelay)
         {
             timer += Time.deltaTime;
-
             if (explosionZoneVisual)
             {
                 float pulse = 1f + Mathf.Sin(Time.time * blinkSpeed) * 0.15f;
-
-                // Ne scale que X et Z, Y reste constant
-                Vector3 newScale = explosionZoneVisual.transform.localScale;
-                newScale.x = explosionRadius * 2f * pulse;
-                newScale.z = explosionRadius * 2f * pulse;
-                explosionZoneVisual.transform.localScale = newScale;
+                var scale = Vector3.one * explosionRadius * 4f * pulse;
+                scale.y = 0.1f;
+                explosionZoneVisual.transform.localScale = scale;
             }
-
             yield return null;
         }
-
 
         Explode();
     }
 
-
     private void Explode()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, explosionRadius);
+        HashSet<PlayerController> alreadyHit = new HashSet<PlayerController>();
 
         foreach (Collider hit in hits)
         {
             if (hit.CompareTag("Player"))
             {
-                PlayerController pc = hit.GetComponent<PlayerController>();
-                // ?? Knockback
-                if (pc != null)
+                var pc = hit.GetComponent<PlayerController>();
+                if (pc != null && !alreadyHit.Contains(pc))
                 {
-                    pc.hp--;
-                    Vector3 pushDir = (hit.transform.position - transform.position);
+                    pc.OnTakeDamage(explosionDamage);
+                    Vector3 pushDir = hit.transform.position - transform.position;
                     pushDir.y = 0f;
-
                     pc.ApplyKnockback(pushDir, explosionForce);
+                    alreadyHit.Add(pc);
                 }
             }
         }
+
+        // Instanciation du prefab d'explosion
+        if (explosionPrefab)
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+
+        // Lecture du son d'explosion
+        if (explosionSound)
+            Instantiate(explosionSound, transform.position, Quaternion.identity);
+
+        if (explosionZoneVisual)
+            explosionZoneVisual.SetActive(false);
+
+        Die();
+    }
+
+    protected override void Die()
+    {
         if (collectiblePrefab)
-        {
-            GameObject loot = Instantiate(collectiblePrefab, transform.position, Quaternion.identity);
-        }
+            Instantiate(collectiblePrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
