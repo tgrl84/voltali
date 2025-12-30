@@ -8,7 +8,6 @@ public class SHAEnnemy : Enemy
     private Transform player;
 
     [Header("SHA Settings")]
-    public new float hp = 4f;
     public float chargeSpeed = 8f;
     public float bounceForce = 12f;
     public float attackRange = 2f;
@@ -122,15 +121,13 @@ public class SHAEnnemy : Enemy
 
         if (playerController != null)
         {
-            playerController.hp -= 1;
+            playerController.OnTakeDamage(1);
             if (explosionPrefab)
                 Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             if (explosionSoundPrefab)
                 Instantiate(explosionSoundPrefab, transform.position, Quaternion.identity);
-
-            hp -= 2f;
-            if (hp <= 0)
-                Die();
+            takeDamage(2);
+            
         }
         StartBounce();
         StartCoroutine(AttackCooldown());
@@ -208,10 +205,8 @@ public class SHAEnnemy : Enemy
     {
         if (other.gameObject.tag == "Bullet")
         {
-            hp -= (playerController.dmg * playerController.multiplier * playerController.multicount) * 2f;
+            takeDamage((playerController.dmg * playerController.multiplier * playerController.multicount) * 2f);
             playerController.multiplier = 1f;
-            if (hp <= 0)
-                Die();
         }
         if (other.gameObject.tag == "Player" && isCharging && canAttack)
         {
@@ -219,7 +214,9 @@ public class SHAEnnemy : Enemy
         }
     }
 
-    private void Die()
+
+
+    protected override void Die()
     {
         if (explosionPrefab)
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
@@ -240,3 +237,4 @@ public class SHAEnnemy : Enemy
         Gizmos.DrawWireSphere(transform.position, retreatDistance);
     }
 }
+ 

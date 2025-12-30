@@ -41,15 +41,22 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.tag == "Bullet")
         {
             Debug.Log("hit !");
-            hp -= playerController.dmg * playerController.multiplier * playerController.multicount;
+            takeDamage(playerController.dmg * playerController.multiplier * playerController.multicount);
             playerController.multiplier = 1f;
-
-            if (hp <= 0)
-                Die();
         }
     }
 
-    private void Die()
+    protected void takeDamage(float damage)
+    {
+        hp -= damage;
+        if (hp <= 0)
+            Die();
+        // update health display
+        HPText.text = hp.ToString();
+        HPbar.fillAmount = hp / 5f;
+
+    }
+    protected virtual void Die()
     {
         if (collectiblePrefab)
         {

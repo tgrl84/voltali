@@ -57,18 +57,26 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        if (other.gameObject.tag == "BulletEnemy" || other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "BulletEnemy")
         {
-            hp--;
-
+            OnTakeDamage(1);
         }
-        if (hp < 0) { hp = 0; }
+    }
+
+    public void OnTakeDamage(int damage)
+    {
+        hp -= damage;
         if (hp <= 0)
         {
-            Destroy(gameObject);
-            new WaitForSeconds(2f);
-            Time.timeScale = 0;
+            Die();
         }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+        new WaitForSeconds(2f);
+        Time.timeScale = 0;
     }
     public void OnJump(InputAction.CallbackContext context)
     {
