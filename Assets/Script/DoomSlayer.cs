@@ -14,8 +14,6 @@ public class DoomSlayer : Enemy
 
     [Header("Positionnement")]
     public Transform polygonParent; // À assigner dans l'inspecteur (parent des points du polygone)
-    public float minRange = 5f;
-    public float maxRange = 10f;
 
     private Transform player;
     private Rigidbody rb;
@@ -27,6 +25,11 @@ public class DoomSlayer : Enemy
         hp = 20f;
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        // Correction : Utiliser GameObject.FindGameObjectWithTag pour récupérer le parent du polygone
+        GameObject zone = GameObject.FindGameObjectWithTag("GameZone");
+        if (zone != null)
+            polygonParent = zone.transform;
+        scoreValue = 100; // Score pour DoomSlayer (boss)
     }
 
     private void Start()
@@ -38,7 +41,7 @@ public class DoomSlayer : Enemy
         if (player)
         {
             targetPosition = GetRandomPointInPolygon();
-            Debug.Log("target pos = " + targetPosition);
+            Debug.Log("DoomSlayer target pos = " + targetPosition);
             StartCoroutine(MoveToPositionAndAttack());
         }
     }
@@ -99,11 +102,20 @@ public class DoomSlayer : Enemy
     {
         if (hp <= 0)
         {
-            if (collectiblePrefab)
-                Instantiate(collectiblePrefab, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            Die();
         }
         HPText.text = hp.ToString();
+    }
+
+    protected override void Die()
+    {
+        // Ajouter le score
+        if (gameManager != null)
+            gameManager.AddScore(scoreValue);
+            
+        if (collectiblePrefab)
+            Instantiate(collectiblePrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
     public override void Move() { }
@@ -112,11 +124,17 @@ public class DoomSlayer : Enemy
     // --- Spawn dans un polygone défini par les enfants de polygonParent ---
     private Vector3 GetRandomPointInPolygon()
     {
-        // Récupère les points (vertices) du polygone
+        if (polygonParent == null)
+            return transform.position;
+
+        // Récupère les points (vertices) du polygone en utilisant TransformPoint pour les positions locales
         List<Vector2> vertices = new List<Vector2>();
         foreach (Transform child in polygonParent)
         {
-            vertices.Add(new Vector2(child.position.x, child.position.z));
+            // Utiliser TransformPoint pour convertir correctement la position locale en position mondiale
+            Vector3 worldPos = polygonParent.TransformPoint(child.localPosition);
+            vertices.Add(new Vector2(worldPos.x, worldPos.z));
+            Debug.Log($"DoomSlayer Polygon vertex world pos: {worldPos}");
         }
 
         if (vertices.Count < 3)
@@ -156,5 +174,13 @@ public class DoomSlayer : Enemy
         }
         Vector2 point = a + r1 * (b - a) + r2 * (c - a);
         return point;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Dessiner la position cible pour debug
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(targetPosition, 0.5f);
+        Gizmos.DrawLine(transform.position, targetPosition);
     }
 }

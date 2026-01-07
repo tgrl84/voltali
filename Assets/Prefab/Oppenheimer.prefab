@@ -2116,8 +2116,8 @@ MonoBehaviour:
   explosionDamage: 2
   explosionDelay: 3
   explosionForce: 10
-  explosionPrefab: {fileID: 0}
-  explosionSound: {fileID: 0}
+  explosionPrefab: {fileID: 1314431937918451876, guid: 8ed4285350c85814791dde5a8d178624, type: 3}
+  explosionSound: {fileID: 8325097343150290868, guid: 11cd08c6d9cc20049963dd9a606035ad, type: 3}
   explosionZoneVisual: {fileID: 6492533592085363725}
   blinkSpeed: 8
 --- !u!1 &6438422602210394267
@@ -2169,7 +2169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8063419817318187547
 Transform:
   m_ObjectHideFlags: 0

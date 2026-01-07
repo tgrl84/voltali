@@ -27,6 +27,8 @@ public class Oppenheimer : Enemy
 
     private Rigidbody rb;
     private bool isExploding = false;
+    private int scoreValue;
+    private GameManager gameManager;
 
     private void Awake()
     {
@@ -35,6 +37,7 @@ public class Oppenheimer : Enemy
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         if (explosionZoneVisual)
             explosionZoneVisual.SetActive(false);
+        scoreValue = 50; // Score pour Oppenheimer
     }
 
     public void SetTarget(Transform target)
@@ -139,6 +142,10 @@ public class Oppenheimer : Enemy
 
     protected override void Die()
     {
+        // Ajouter le score
+        if (gameManager != null)
+            gameManager.AddScore(scoreValue);
+            
         if (collectiblePrefab)
             Instantiate(collectiblePrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
