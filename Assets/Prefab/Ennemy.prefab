@@ -409,11 +409,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3982809104387127198}
-  - component: {fileID: 2325785297808364063}
+  - component: {fileID: 5061806239365549554}
+  - component: {fileID: 52316575356295488}
   - component: {fileID: 3291442123747587633}
   m_Layer: 0
   m_Name: Ennemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -435,7 +436,34 @@ Transform:
   - {fileID: 8502921039913307351}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2325785297808364063
+--- !u!54 &5061806239365549554
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7330927006642990482}
+  serializedVersion: 5
+  m_Mass: 0.5
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &52316575356295488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -444,13 +472,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7330927006642990482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91342cb29b26a1447af08cfce4352635, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ca76dab69fb76f44be118030e6171f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 5
   playerController: {fileID: 0}
   HPbar: {fileID: 5707000881013658243}
+  collectiblePrefab: {fileID: 4690668973156940679, guid: 48566c7efba762c42a5d7046a738de0e, type: 3}
   HPText: {fileID: 2801790879311952129}
+  GameManager: {fileID: 0}
+  bulletPrefab: {fileID: 7376642679975499003, guid: 7a630f0f5e4df7c4c9dfc91ea15eceac, type: 3}
+  maxDist: 0.5
+  moveSpeed: 5
+  polygonParent: {fileID: 0}
 --- !u!136 &3291442123747587633
 CapsuleCollider:
   m_ObjectHideFlags: 0

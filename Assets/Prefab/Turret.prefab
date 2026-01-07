@@ -268,15 +268,12 @@ MonoBehaviour:
   HPbar: {fileID: 0}
   collectiblePrefab: {fileID: 4690668973156940679, guid: 48566c7efba762c42a5d7046a738de0e, type: 3}
   HPText: {fileID: 3770162376515924123}
-  bulletPrefab: {fileID: 6539844135095342303, guid: 805e7f3543af57e4ba5a2a3b07d64884, type: 3}
+  bulletPrefab: {fileID: 7376642679975499003, guid: 7a630f0f5e4df7c4c9dfc91ea15eceac, type: 3}
   bulletSpeed: 20
-  shootInterval: 2
+  shootInterval: 10
   burstCount: 5
-  burstRate: 0.15
-  minRange: 5
-  maxRange: 10
-  visibleMin: {x: -12, y: -8}
-  visibleMax: {x: 12, y: 8}
+  burstRate: 0.3
+  polygonParent: {fileID: 0}
 --- !u!65 &4738754719977085865
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -296,8 +293,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Size: {x: 1, y: 4.4651732, z: 1}
+  m_Center: {x: 0, y: 1.8825867, z: 0}
 --- !u!1 &6559443073428382247
 GameObject:
   m_ObjectHideFlags: 0

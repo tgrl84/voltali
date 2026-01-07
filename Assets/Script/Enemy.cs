@@ -6,13 +6,20 @@ public class Enemy : MonoBehaviour
 {
     public float hp = 5f;
     public PlayerController playerController;
+    public GameManager gameManager; // Référence au GameManager pour ajouter le score
     public Image HPbar;
     public GameObject collectiblePrefab;
     public TextMeshProUGUI HPText;
+
+    [Header("Score")]
+    public int scoreValue = 10; // Score donné à la mort (valeur par défaut)
+
     // Start is called once before the first execution of Update after the MonoBehaviour is create
     void Start()
     {
         playerController = FindAnyObjectByType<PlayerController>();
+        if (gameManager == null)
+            gameManager = FindAnyObjectByType<GameManager>();
     }
 
     public virtual void DetectHealth()

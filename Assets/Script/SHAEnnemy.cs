@@ -44,6 +44,7 @@ public class SHAEnnemy : Enemy
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         lastPosition = transform.position;
+        scoreValue = 15; // Score pour SHA
     }
 
     private void FixedUpdate()
@@ -214,10 +215,12 @@ public class SHAEnnemy : Enemy
         }
     }
 
-
-
     protected override void Die()
     {
+        // Ajouter le score
+        if (gameManager != null)
+            gameManager.AddScore(scoreValue);
+            
         if (explosionPrefab)
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         if (explosionSoundPrefab)
@@ -237,4 +240,3 @@ public class SHAEnnemy : Enemy
         Gizmos.DrawWireSphere(transform.position, retreatDistance);
     }
 }
- 
