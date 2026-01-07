@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // Configuration d'un type d'ennemi pour le spawn
 [System.Serializable]
 public class EnemySpawnConfig
 {
+    
     public GameObject enemyPrefab;
     [Range(0f, 100f)]
     public float spawnProbability = 50f; // Probabilité de spawn (en %)
@@ -33,6 +35,8 @@ public class WaveConfig
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject GameOver;
+    public GameObject pause;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public int score;
     public Vector2 moveInput;
@@ -69,6 +73,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (pc.hp<=0) { StartCoroutine(StopGame()); }
         // Vérification du score pour le pop-up de bonus
         if (ScoreBonus.Count > 0 && score >= ScoreBonus[0])
         {
@@ -113,7 +118,7 @@ public class GameManager : MonoBehaviour
             // Surbrillance de l'icône sélectionnée
             for (int i = 0; i < BonusIcons.Length; i++)
             {
-                BonusIcons[i].color = (i == selectedIndex) ? Color.yellow : Color.white;
+                BonusIcons[i].color = (i == selectedIndex) ? Color.green : Color.white;
             }
 
             // Validation du bonus
@@ -442,6 +447,7 @@ public class GameManager : MonoBehaviour
 
     public void BonusPopUp()
     {
+        pause.SetActive(false);
         BonusHUD.SetActive(true);
         Time.timeScale = 0;
     }
@@ -490,11 +496,19 @@ public class GameManager : MonoBehaviour
         
         // Vérifier que l'index ne dépasse pas la taille du tableau
         int scoreIndex = Mathf.Clamp(score / 10, 0, ImageList.Length - 1);
-        if (ImageList.Length > 0)
-            ScoreNumber.sprite = ImageList[scoreIndex];
+        if (scoreIndex >= ImageList.Length)  scoreIndex = ImageList.Length; 
+        if (ImageList.Length > 0)ScoreNumber.sprite = ImageList[scoreIndex];
             
         ScoreImage_Add.gameObject.SetActive(false);
 
+        yield return new WaitForSeconds(1.2f);
+    }
+
+    IEnumerator StopGame()
+    {
+        GameOver.SetActive(true);
+        yield return new WaitForSeconds(1.2f);
+        SceneManager.LoadScene("Menu");
         yield return new WaitForSeconds(1.2f);
     }
 }

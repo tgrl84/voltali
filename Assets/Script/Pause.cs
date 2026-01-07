@@ -19,6 +19,9 @@ public class Pause : MonoBehaviour
 
     void Update()
     {
+        if (!isPaused)
+            return;
+
         var gamepad = Gamepad.current;
         if (gamepad != null)
         {
@@ -29,12 +32,12 @@ public class Pause : MonoBehaviour
         // Navigation gauche/droite avec cooldown
         if (Time.unscaledTime - lastInputTime > inputCooldown)
         {
-            if (moveInput.x > 0.5f)
+            if (moveInput.y > 0.5f)
             {
                 selectedIndex = (selectedIndex + 1) % Buttons.Length;
                 lastInputTime = Time.unscaledTime;
             }
-            else if (moveInput.x < -0.5f)
+            else if (moveInput.y < -0.5f)
             {
                 selectedIndex = (selectedIndex - 1 + Buttons.Length) % Buttons.Length;
                 lastInputTime = Time.unscaledTime;
@@ -55,11 +58,14 @@ public class Pause : MonoBehaviour
 
     void Navigation(int index)
     {
+        if (!isPaused)
+            return;
         switch (index)
         {
             case 0: TogglePause(); break;
             case 1: Quit(); break;
         }
+        submitPressed = false;
         MenuPause.SetActive(false);
         Time.timeScale = 1;
     }
@@ -87,6 +93,7 @@ public class Pause : MonoBehaviour
 
     void Start()
     {
+        submitPressed = false;
         MenuPause.SetActive(false);
     }
 }
