@@ -49,7 +49,7 @@ public class Pause : MonoBehaviour
 
         if (submitPressed)
         {
-            Debug.Log("Submit"); 
+            Navigation(selectedIndex); 
         }
     }
 
@@ -72,6 +72,7 @@ public class Pause : MonoBehaviour
     void Awake()
     {
         pause = new InputAction("Pause", InputActionType.Button, "<Keyboard>/Tab");
+        pause = new InputAction("Pause", InputActionType.Button, "<Gamepad>/Start");
         pause.performed += _ => TogglePause();
         pause.Enable();
     }
