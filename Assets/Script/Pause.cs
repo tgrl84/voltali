@@ -1,11 +1,73 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class Pause : MonoBehaviour
 {
     public GameObject MenuPause;
     private InputAction pause;
     private bool isPaused;
+    public Image[] Buttons;
+    private float lastInputTime;
+    public Vector2 moveInput;
+    public bool submitPressed;
+    public int selectedIndex = 0;
+    private float inputCooldown = 0.2f;
+
+
+    void Update()
+    {
+        var gamepad = Gamepad.current;
+        if (gamepad != null)
+        {
+            moveInput = gamepad.leftStick.ReadValue();
+            submitPressed = gamepad.buttonSouth.wasPressedThisFrame; 
+        }
+
+        // Navigation gauche/droite avec cooldown
+        if (Time.unscaledTime - lastInputTime > inputCooldown)
+        {
+            if (moveInput.x > 0.5f)
+            {
+                selectedIndex = (selectedIndex + 1) % Buttons.Length;
+                lastInputTime = Time.unscaledTime;
+            }
+            else if (moveInput.x < -0.5f)
+            {
+                selectedIndex = (selectedIndex - 1 + Buttons.Length) % Buttons.Length;
+                lastInputTime = Time.unscaledTime;
+            }
+        }
+
+        // Surbrillance de l’icône sélectionnée
+        for (int i = 0; i < Buttons.Length; i++)
+        {
+            Buttons[i].color = (i == selectedIndex) ? Color.yellow : Color.white;
+        }
+
+        if (submitPressed)
+        {
+            Debug.Log("Submit"); 
+        }
+    }
+
+    void Navigation(int index)
+    {
+        switch (index)
+        {
+            case 0: TogglePause(); break;
+            case 1: Quit(); break;
+        }
+        MenuPause.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void Quit()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 
     void Awake()
     {
