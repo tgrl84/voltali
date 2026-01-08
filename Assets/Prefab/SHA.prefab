@@ -146,8 +146,8 @@ BoxCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 2, z: 0.5}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 0.5, y: 1.3457583, z: 0.5}
+  m_Center: {x: 0, y: 0.67287916, z: 0}
 --- !u!114 &6445525765280684746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,9 +162,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 4
   playerController: {fileID: 0}
+  gameManager: {fileID: 0}
   HPbar: {fileID: 3256018182987024139}
   collectiblePrefab: {fileID: 4690668973156940679, guid: 48566c7efba762c42a5d7046a738de0e, type: 3}
   HPText: {fileID: 6999783588693938287}
+  scoreValue: 10
   chargeSpeed: 6
   bounceForce: 12
   attackRange: 2

@@ -1,5 +1,6 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,7 +14,7 @@ public class EnemySpawnConfig
     
     public GameObject enemyPrefab;
     [Range(0f, 100f)]
-    public float spawnProbability = 50f; // Probabilité de spawn (en %)
+    public float spawnProbability = 50f; // ProbabilitÃ© de spawn (en %)
     public bool isContinuous = false; // Pour les SHA : ennemi "parasite" qui ne compte pas dans la vague
     [Tooltip("Cooldown min/max pour le respawn continu (SHA)")]
     public float respawnCooldownMin = 2f;
@@ -25,16 +26,24 @@ public class EnemySpawnConfig
 public class WaveConfig
 {
     public string waveName = "Vague";
-    public int totalEnemies = 10; // Nombre total d'ennemis NON-CONTINUS à tuer pour finir la vague
-    public int maxEnemiesAtOnce = 5; // Nombre max d'ennemis NON-CONTINUS en même temps
+    public int totalEnemies = 10; // Nombre total d'ennemis NON-CONTINUS Ã  tuer pour finir la vague
+    public int maxEnemiesAtOnce = 5; // Nombre max d'ennemis NON-CONTINUS en mÃªme temps
     public Transform spawnPoint; // Point de spawn des ennemis
     public List<EnemySpawnConfig> enemyConfigs = new List<EnemySpawnConfig>();
-    [Tooltip("Délai avant de commencer la vague")]
+    [Tooltip("DÃ©lai avant de commencer la vague")]
     public float delayBeforeWave = 2f;
 }
-
+public class BonusCard
+{
+    public string id;
+    public Sprite icon;
+    public System.Action effect;
+    public System.Func<bool> canAppear;
+}
 public class GameManager : MonoBehaviour
 {
+    public bool hasLaser = false;
+    public bool laserUpgradeDuration = false;
     public GameObject GameOver;
     public GameObject pause;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -54,40 +63,43 @@ public class GameManager : MonoBehaviour
     public Sprite[] ImageAdd;
     private List<int> ScoreBonus = new List<int> { 50, 100, 150, 200, 250, 300, 350, 400, 450, 500 };
     public int selectedIndex = 0; // 0 = dmg, 1 = speed, 2 = bullet speed
-    public Image[] BonusIcons; // assigner les icônes des 3 bonus dans l'inspecteur
-    private float inputCooldown = 0.2f; // éviter que l'axe soit lu plusieurs fois trop vite
+    public Image[] BonusIcons; // UI (3 cartes affichÃ©es)
+    private List<BonusCard> allCards = new List<BonusCard>();
+    private List<BonusCard> currentCards = new List<BonusCard>();
+    private float inputCooldown = 0.2f; // Ã©viter que l'axe soit lu plusieurs fois trop vite
     private float lastInputTime;
 
-    [Header("Système de Vagues")]
+    [Header("SystÃ¨me de Vagues")]
     public List<WaveConfig> waves = new List<WaveConfig>();
-    public Transform defaultSpawnPoint; // Point de spawn par défaut si non spécifié dans la vague
+    public Transform defaultSpawnPoint; // Point de spawn par dÃ©faut si non spÃ©cifiÃ© dans la vague
     
     private int currentWaveIndex = 0;
-    private int enemiesKilledThisWave = 0; // Ennemis normaux tués
-    private int enemiesSpawnedThisWave = 0; // Ennemis normaux spawnés
+    private int enemiesKilledThisWave = 0; // Ennemis normaux tuÃ©s
+    private int enemiesSpawnedThisWave = 0; // Ennemis normaux spawnÃ©s
     private int currentNormalEnemiesAlive = 0; // Ennemis normaux en vie
     private bool waveInProgress = false;
     private WaveConfig currentWave;
     private List<GameObject> activeEnemies = new List<GameObject>(); // Ennemis normaux
     private List<GameObject> continuousEnemies = new List<GameObject>(); // Ennemis continus (parasites)
+    public Sprite[] CardSprites; // assigner les images uniques de chaque carte dans lâ€™inspecteur
 
     void Update()
     {
         if (pc.hp<=0) { StartCoroutine(StopGame()); }
-        // Vérification du score pour le pop-up de bonus
+        // VÃ©rification du score pour le pop-up de bonus
         if (ScoreBonus.Count > 0 && score >= ScoreBonus[0])
         {
             BonusPopUp();
             ScoreBonus.RemoveAt(0);
         }
 
-        // Vérification de la fin de niveau (toutes les vagues terminées)
+        // VÃ©rification de la fin de niveau (toutes les vagues terminÃ©es)
         if (!waveInProgress && currentWaveIndex >= waves.Count && waves.Count > 0)
         {
             FinishLevel.Stop();
         }
 
-        // Mise à jour du texte du score
+        // Mise Ã  jour du texte du score
         ScoreText.text = score.ToString();
 
         // Gestion du HUD de bonus
@@ -115,7 +127,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            // Surbrillance de l'icône sélectionnée
+            // Surbrillance de l'icÃ´ne sÃ©lectionnÃ©e
             for (int i = 0; i < BonusIcons.Length; i++)
             {
                 BonusIcons[i].color = (i == selectedIndex) ? Color.green : Color.white;
@@ -131,37 +143,102 @@ public class GameManager : MonoBehaviour
 
     void ApplyBonus(int index)
     {
-        switch (index)
-        {
-            case 0: addDmg(); break;
-            case 1: addSpeed(); break;
-            case 2: addbulletSpeed(); break;
-        }
+        if (index < 0 || index >= currentCards.Count)
+            return;
+
+        currentCards[index].effect.Invoke();
+
         BonusHUD.SetActive(false);
-        Time.timeScale = 1; 
+        Time.timeScale = 1;
     }
+
 
     void Start()
     {
+            score = 0;
+
+        allCards.Add(new BonusCard
+        {
+            id = "Damage",
+            icon = CardSprites[0], // unique image
+            effect = () => pc.dmg *= 1.5f,
+            canAppear = null
+        });
+
+        allCards.Add(new BonusCard
+        {
+            id = "Speed",
+            icon = CardSprites[1],
+            effect = () => pc.speed += 2f,
+            canAppear = null
+        });
+
+        allCards.Add(new BonusCard
+        {
+            id = "BulletSpeed",
+            icon = CardSprites[2],
+            effect = () => pc.bulletSpeed += 10f,
+            canAppear = () => !pc.Laser
+        });
+
+        allCards.Add(new BonusCard
+        {
+            id = "Laser",
+            icon = CardSprites[3],
+            effect = () =>
+            {
+                pc.Laser = true;
+                pc.LaserLength = 3f; // durÃ©e initiale
+            },
+            canAppear = () => !pc.Laser
+        });
+
+        allCards.Add(new BonusCard
+        {
+            id = "BulletMult",
+            icon = CardSprites[4],
+            effect = () => pc.AddMult() ,
+            canAppear = () => !pc.Laser
+        });
+        allCards.Add(new BonusCard
+        {
+            id = "LaserLength",
+            icon = CardSprites[5],
+            effect = () => pc.LaserLength += 3f,
+            canAppear = () => pc.Laser
+        });
+        allCards.Add(new BonusCard
+        {
+            id = "HP",
+            icon = CardSprites[6], // unique image
+            effect = () => pc.hp = 5,
+            canAppear = null
+        });
+
+
+        // âž• plus tard
+        // allCards.Add(new BonusCard { ... });
+
+
         score = 0;
         ScoreNumber.sprite = ImageList[0];
         ScoreImage_Add.gameObject.SetActive(false);
         StartCoroutine(EventLoop());
         
-        // Démarrer la première vague
+        // DÃ©marrer la premiÃ¨re vague
         if (waves.Count > 0)
         {
             StartCoroutine(StartWave(0));
         }
     }
 
-    // ==================== SYSTÈME DE VAGUES ====================
+    // ==================== SYSTÃˆME DE VAGUES ====================
 
     IEnumerator StartWave(int waveIndex)
     {
         if (waveIndex >= waves.Count)
         {
-            Debug.Log("Toutes les vagues sont terminées !");
+            Debug.Log("Toutes les vagues sont terminÃ©es !");
             yield break;
         }
 
@@ -172,27 +249,27 @@ public class GameManager : MonoBehaviour
         currentNormalEnemiesAlive = 0;
         waveInProgress = true;
         activeEnemies.Clear();
-        // Note: on ne clear pas continuousEnemies ici, ils seront détruits à la fin de la vague précédente
+        // Note: on ne clear pas continuousEnemies ici, ils seront dÃ©truits Ã  la fin de la vague prÃ©cÃ©dente
 
-        Debug.Log($"=== Début de la {currentWave.waveName} (Vague {waveIndex + 1}/{waves.Count}) ===");
-        Debug.Log($"Ennemis total: {currentWave.totalEnemies}, Max simultanés: {currentWave.maxEnemiesAtOnce}");
+        Debug.Log($"=== DÃ©but de la {currentWave.waveName} (Vague {waveIndex + 1}/{waves.Count}) ===");
+        Debug.Log($"Ennemis total: {currentWave.totalEnemies}, Max simultanÃ©s: {currentWave.maxEnemiesAtOnce}");
 
-        // Délai avant la vague
+        // DÃ©lai avant la vague
         yield return new WaitForSeconds(currentWave.delayBeforeWave);
 
         // Spawn des ennemis continus d'abord
         SpawnContinuousEnemies();
 
-        // Spawn initial des ennemis normaux (jusqu'à maxEnemiesAtOnce)
+        // Spawn initial des ennemis normaux (jusqu'Ã  maxEnemiesAtOnce)
         int initialSpawnCount = Mathf.Min(currentWave.maxEnemiesAtOnce, currentWave.totalEnemies);
         for (int i = 0; i < initialSpawnCount; i++)
         {
             SpawnNormalEnemy();
-            yield return new WaitForSeconds(0.3f); // Petit délai entre chaque spawn
+            yield return new WaitForSeconds(0.3f); // Petit dÃ©lai entre chaque spawn
         }
     }
 
-    // Spawn tous les ennemis continus configurés pour cette vague
+    // Spawn tous les ennemis continus configurÃ©s pour cette vague
     void SpawnContinuousEnemies()
     {
         foreach (var config in currentWave.enemyConfigs)
@@ -212,7 +289,7 @@ public class GameManager : MonoBehaviour
         Transform spawnPoint = currentWave.spawnPoint != null ? currentWave.spawnPoint : defaultSpawnPoint;
         if (spawnPoint == null)
         {
-            Debug.LogError("Aucun point de spawn défini !");
+            Debug.LogError("Aucun point de spawn dÃ©fini !");
             return;
         }
 
@@ -222,7 +299,7 @@ public class GameManager : MonoBehaviour
         // Configurer l'ennemi
         SetupEnemy(enemy, config);
 
-        Debug.Log($"Ennemi continu spawné: {config.enemyPrefab.name}");
+        Debug.Log($"Ennemi continu spawnÃ©: {config.enemyPrefab.name}");
     }
 
     // Spawn un ennemi normal (compte dans la vague)
@@ -231,18 +308,18 @@ public class GameManager : MonoBehaviour
         if (currentWave == null || enemiesSpawnedThisWave >= currentWave.totalEnemies)
             return;
 
-        // Sélectionner un ennemi NON-CONTINU basé sur les probabilités
+        // SÃ©lectionner un ennemi NON-CONTINU basÃ© sur les probabilitÃ©s
         EnemySpawnConfig selectedConfig = SelectNormalEnemyByProbability();
         if (selectedConfig == null || selectedConfig.enemyPrefab == null)
         {
-            Debug.LogWarning("Aucun ennemi normal configuré pour cette vague !");
+            Debug.LogWarning("Aucun ennemi normal configurÃ© pour cette vague !");
             return;
         }
 
         Transform spawnPoint = currentWave.spawnPoint != null ? currentWave.spawnPoint : defaultSpawnPoint;
         if (spawnPoint == null)
         {
-            Debug.LogError("Aucun point de spawn défini !");
+            Debug.LogError("Aucun point de spawn dÃ©fini !");
             return;
         }
 
@@ -255,7 +332,7 @@ public class GameManager : MonoBehaviour
         // Configurer l'ennemi
         SetupEnemy(enemy, selectedConfig);
 
-        Debug.Log($"Ennemi normal spawné: {selectedConfig.enemyPrefab.name} ({enemiesSpawnedThisWave}/{currentWave.totalEnemies})");
+        Debug.Log($"Ennemi normal spawnÃ©: {selectedConfig.enemyPrefab.name} ({enemiesSpawnedThisWave}/{currentWave.totalEnemies})");
     }
 
     void SetupEnemy(GameObject enemy, EnemySpawnConfig config)
@@ -265,7 +342,7 @@ public class GameManager : MonoBehaviour
         if (baseEnemy != null)
         {
             baseEnemy.playerController = pc;
-            baseEnemy.gameManager = this; // Assigner le gameManager à tous les ennemis
+            baseEnemy.gameManager = this; // Assigner le gameManager Ã  tous les ennemis
         }
 
         // Configuration pour SHAEnnemy
@@ -296,7 +373,7 @@ public class GameManager : MonoBehaviour
         lifeComponent.OnDeath += () => OnEnemyDeath(enemy, capturedConfig);
     }
 
-    // Sélectionne uniquement parmi les ennemis NON-CONTINUS
+    // SÃ©lectionne uniquement parmi les ennemis NON-CONTINUS
     EnemySpawnConfig SelectNormalEnemyByProbability()
     {
         if (currentWave.enemyConfigs.Count == 0)
@@ -313,7 +390,7 @@ public class GameManager : MonoBehaviour
         if (normalConfigs.Count == 0)
             return null;
 
-        // Calculer la somme totale des probabilités
+        // Calculer la somme totale des probabilitÃ©s
         float totalProbability = 0f;
         foreach (var config in normalConfigs)
         {
@@ -323,7 +400,7 @@ public class GameManager : MonoBehaviour
         if (totalProbability <= 0f)
             return normalConfigs[0];
 
-        // Tirer un nombre aléatoire
+        // Tirer un nombre alÃ©atoire
         float randomValue = Random.Range(0f, totalProbability);
         float cumulative = 0f;
 
@@ -356,7 +433,7 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(RespawnContinuousAfterCooldown(config, cooldown));
             }
 
-            Debug.Log("Ennemi continu tué ! (ne compte pas dans la vague)");
+            Debug.Log("Ennemi continu tuÃ© ! (ne compte pas dans la vague)");
             return;
         }
 
@@ -370,16 +447,16 @@ public class GameManager : MonoBehaviour
         enemiesKilledThisWave++;
         EnemyNumber = currentNormalEnemiesAlive;
 
-        Debug.Log($"Ennemi normal tué ! ({enemiesKilledThisWave}/{currentWave.totalEnemies})");
+        Debug.Log($"Ennemi normal tuÃ© ! ({enemiesKilledThisWave}/{currentWave.totalEnemies})");
 
-        // Vérifier si la vague est terminée
+        // VÃ©rifier si la vague est terminÃ©e
         if (enemiesKilledThisWave >= currentWave.totalEnemies)
         {
             OnWaveComplete();
             return;
         }
 
-        // Spawn un remplaçant si on n'a pas atteint le total
+        // Spawn un remplaÃ§ant si on n'a pas atteint le total
         if (enemiesSpawnedThisWave < currentWave.totalEnemies && 
             currentNormalEnemiesAlive < currentWave.maxEnemiesAtOnce)
         {
@@ -391,7 +468,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldown);
         
-        // Vérifier que la vague est encore en cours
+        // VÃ©rifier que la vague est encore en cours
         if (waveInProgress)
         {
             SpawnContinuousEnemy(config);
@@ -401,12 +478,12 @@ public class GameManager : MonoBehaviour
     void OnWaveComplete()
     {
         waveInProgress = false;
-        Debug.Log($"=== {currentWave.waveName} TERMINÉE ! ===");
+        Debug.Log($"=== {currentWave.waveName} TERMINÃ‰E ! ===");
 
-        // Détruire tous les ennemis continus restants
+        // DÃ©truire tous les ennemis continus restants
         DestroyContinuousEnemies();
 
-        // Passer à la vague suivante
+        // Passer Ã  la vague suivante
         currentWaveIndex++;
         if (currentWaveIndex < waves.Count)
         {
@@ -414,7 +491,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("=== TOUTES LES VAGUES TERMINÉES ! VICTOIRE ! ===");
+            Debug.Log("=== TOUTES LES VAGUES TERMINÃ‰ES ! VICTOIRE ! ===");
         }
     }
 
@@ -428,29 +505,57 @@ public class GameManager : MonoBehaviour
             }
         }
         continuousEnemies.Clear();
-        Debug.Log("Tous les ennemis continus ont été détruits.");
+        Debug.Log("Tous les ennemis continus ont Ã©tÃ© dÃ©truits.");
     }
 
-    // Méthode publique pour notifier la mort d'un ennemi (appelée par les ennemis)
+    // MÃ©thode publique pour notifier la mort d'un ennemi (appelÃ©e par les ennemis)
     public void NotifyEnemyDeath()
     {
-        // Cette méthode peut être utilisée par les ennemis qui n'ont pas SHALife
+        // Cette mÃ©thode peut Ãªtre utilisÃ©e par les ennemis qui n'ont pas SHALife
         // La logique principale est dans OnEnemyDeath via SHALife
     }
 
-    // ==================== AUTRES MÉTHODES ====================
+    // ==================== AUTRES MÃ‰THODES ====================
 
     public void AddScore(int adds)
     {
         StartCoroutine(AnimAddScore(adds));
     }
 
-    public void BonusPopUp()
+    void BonusPopUp()
     {
         pause.SetActive(false);
         BonusHUD.SetActive(true);
         Time.timeScale = 0;
+
+        GenerateRandomCards();
     }
+    void GenerateRandomCards()
+    {
+        currentCards.Clear();
+
+        // On ne garde que les cartes disponibles
+        List<BonusCard> pool = allCards
+            .Where(card => card.canAppear == null || card.canAppear())
+            .ToList();
+
+        for (int i = 0; i < BonusIcons.Length; i++)
+        {
+            if (pool.Count == 0) break;
+
+            int rand = Random.Range(0, pool.Count);
+            BonusCard card = pool[rand];
+            pool.RemoveAt(rand);
+
+            currentCards.Add(card);
+            BonusIcons[i].sprite = card.icon;
+        }
+
+        selectedIndex = 0;
+    }
+
+
+
 
     public void addDmg()
     {
@@ -477,7 +582,7 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(15f);
             AddScore(10);
         }
     }
@@ -486,7 +591,7 @@ public class GameManager : MonoBehaviour
     {
         ScoreImage_Add.gameObject.SetActive(true);
         
-        // Vérifier que l'index ne dépasse pas la taille du tableau
+        // VÃ©rifier que l'index ne dÃ©passe pas la taille du tableau
         int addIndex = Mathf.Clamp(adds / 10, 0, ImageAdd.Length - 1);
         if (ImageAdd.Length > 0)
             ScoreNumberAddBlank.sprite = ImageAdd[addIndex];
@@ -494,7 +599,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         score += adds;
         
-        // Vérifier que l'index ne dépasse pas la taille du tableau
+        // VÃ©rifier que l'index ne dÃ©passe pas la taille du tableau
         int scoreIndex = Mathf.Clamp(score / 10, 0, ImageList.Length - 1);
         if (scoreIndex >= ImageList.Length)  scoreIndex = ImageList.Length; 
         if (ImageList.Length > 0)ScoreNumber.sprite = ImageList[scoreIndex];

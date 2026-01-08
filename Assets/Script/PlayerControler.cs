@@ -1,10 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.UI;
+
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] GameObject laserPrefab;
+    [SerializeField] float laserMaxLength = 20f;
+    [SerializeField] float growSpeed = 40f;
+    [SerializeField] float damagePerSecond = 25f;
+    public bool Laser;
+    public float LaserLength=3f;
     public QTEManager manager;
     public GameManager gameManager;
     [Header("Mouvement")]
@@ -40,6 +48,7 @@ public class PlayerController : MonoBehaviour
     public int multicount = 1;
     public int hp = 5;
     public float dmg = 1f;
+    private int bulletMult=1;
     public bool TriShotGun=false;
     private bool canRotate = true;
     public bool isReloading = false;
@@ -114,6 +123,7 @@ public class PlayerController : MonoBehaviour
         if (context.started && !isReloading && nbSteel>0)
         {
             StartCoroutine(DoReloadQTE());
+            HudController.Instance.HPPannel.updatePlayerSteelsUI(nbSteel);
         }
     }
     void ReloadWeapon()
@@ -203,28 +213,89 @@ public class PlayerController : MonoBehaviour
         {
             yield return StartCoroutine(TriShotRoutine());
         }
-        else
-        {
-            Shoot();
+        else if(Laser){
+            FireLaser(LaserLength);
         }
+        else
+    {
+        Shoot(bulletMult);
+    }
 
         bulletNumber--;
 
         yield return new WaitForSeconds(fireCooldown);
         canShoot = true;
     }
-    private void Shoot()
+    public void FireLaser(float duration)
     {
-        if (bulletPrefab && firePoint)
-        {
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        StartCoroutine(LaserRoutine(duration));
+    }
+    private void Shoot(int bullets)
+    {
+        if (!bulletPrefab || !firePoint || bullets <= 0)
+            return;
 
-            Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            if (rb != null)
-                rb.linearVelocity = firePoint.forward * bulletSpeed;
+        float anglePerBullet = 7f;   // ouverture ajoutée par balle
+        float maxTotalAngle = 120f;  // limite max
+        float spacing = 0.7f;       // offset physique entre balles
+
+        float totalAngle = Mathf.Min(
+            (bullets - 1) * anglePerBullet,
+            maxTotalAngle
+        );
+
+        // 1 balle → tir droit
+        if (bullets == 1)
+        {
+            SpawnBullet(firePoint.forward, firePoint.position);
+            return;
+        }
+
+        float angleStep = totalAngle / (bullets - 1);
+        float startAngle = -totalAngle / 2f;
+        float startOffset = -(bullets - 1) / 2f;
+
+        for (int i = 0; i < bullets; i++)
+        {
+            float angle = startAngle + angleStep * i;
+
+            Vector3 direction = Quaternion.AngleAxis(
+                angle,
+                firePoint.up
+            ) * firePoint.forward;
+
+            Vector3 offset =
+                firePoint.right * (startOffset + i) * spacing;
+
+            SpawnBullet(direction, firePoint.position + offset);
         }
     }
+
+    private void SpawnBullet(Vector3 direction, Vector3 position)
+    {
+        GameObject bullet = Instantiate(
+            bulletPrefab,
+            position,
+            Quaternion.LookRotation(direction)
+        );
+
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        if (rb != null)
+            rb.linearVelocity = direction * bulletSpeed;
+    }
+
+    public void AddMult()
+    {
+        bulletMult++;
+    }
+
     public float spreadAngle = 15f;
+
+    
+    public interface IDamageable
+    {
+        void TakeDamage(float amount);
+    }
 
     private IEnumerator TriShotRoutine()
     {
@@ -235,6 +306,53 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         ShootBullet(+spreadAngle);
+    }
+
+    private IEnumerator LaserRoutine(float duration)
+    {
+        GameObject laser = Instantiate(
+            laserPrefab,
+            firePoint
+        );
+
+        Transform t = laser.transform;
+
+        float currentLength = 0f;
+        float timer = 0f;
+
+        // Reset
+        t.localPosition = Vector3.zero;
+        t.localRotation = Quaternion.identity;
+        t.localScale = new Vector3(1f, 1f, 0f);
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            currentLength = Mathf.MoveTowards(
+                currentLength,
+                laserMaxLength,
+                growSpeed * Time.deltaTime
+            );
+
+            // Longueur
+            t.localScale = new Vector3(
+                1f,
+                1f,
+                currentLength / 2f
+            );
+
+            // Décalage vers l'avant (Z local)
+            t.localPosition = new Vector3(
+               0f,
+                0f,
+                currentLength / 4f
+            );
+
+            yield return null;
+        }
+
+        Destroy(laser);
     }
 
     private void ShootBullet(float angleOffset)

@@ -44,7 +44,7 @@ public class SHAEnnemy : Enemy
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         lastPosition = transform.position;
-        scoreValue = 15; // Score pour SHA
+        scoreValue = 10; // Score pour SHA
     }
 
     private void FixedUpdate()
