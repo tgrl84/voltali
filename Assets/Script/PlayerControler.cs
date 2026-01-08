@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public QTEManager manager;
     public GameManager gameManager;
+    public Animator animator;
     [Header("Mouvement")]
     public float speed = 5f;
     public float jumpHeight = 2f;
@@ -161,6 +162,8 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = new Vector3(moveInput.x, 0, moveInput.y); // D�placement relatif au monde
         controller.Move(move * speed * Time.deltaTime);
+        animator.SetFloat("Walk", Mathf.Clamp01(move.magnitude));
+
 
         if (jumpInput && isGrounded)
         {
