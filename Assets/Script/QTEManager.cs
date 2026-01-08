@@ -168,7 +168,7 @@ public class QTEManager : MonoBehaviour
 
                 // Feedback visuel
                 if (currentIndex < arrows.Length && arrows[currentIndex] != null)
-                    arrows[currentIndex].color = Color.green;
+                    arrows[currentIndex].color = Color.blue;
 
                 ///
                 nb_bullet_reload = nb_bullet_reload+1;

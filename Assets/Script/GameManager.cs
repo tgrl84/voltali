@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     public bool laserUpgradeDuration = false;
     public GameObject GameOver;
     public GameObject pause;
+    public GameObject startMenu;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public int score;
     public Vector2 moveInput;
@@ -155,6 +156,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(StartMenu());
             score = 0;
 
         allCards.Add(new BonusCard
@@ -236,6 +238,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartWave(int waveIndex)
     {
+        
         if (waveIndex >= waves.Count)
         {
             Debug.Log("Toutes les vagues sont terminées !");
@@ -577,7 +580,13 @@ public class GameManager : MonoBehaviour
         BonusHUD.SetActive(false);
         Time.timeScale = 1;
     }
-    
+
+    IEnumerator StartMenu()
+    {
+        startMenu.SetActive(true);
+        yield return new WaitForSeconds(5f);
+        startMenu.SetActive(false);
+    }
     IEnumerator EventLoop()
     {
         while (true)
