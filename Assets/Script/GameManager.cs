@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
     private List<BonusCard> currentCards = new List<BonusCard>();
     private float inputCooldown = 0.2f; // éviter que l'axe soit lu plusieurs fois trop vite
     private float lastInputTime;
-
+    public TextMeshProUGUI scorefinaleTxT;
     [Header("Système de Vagues")]
     public List<WaveConfig> waves = new List<WaveConfig>();
     public Transform defaultSpawnPoint; // Point de spawn par défaut si non spécifié dans la vague
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
 
         // Mise à jour du texte du score
         ScoreText.text = score.ToString();
-
+        scorefinaleTxT.text = "Score :" + score.ToString();
         // Gestion du HUD de bonus
         if (BonusHUD.activeSelf)
         {
@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour
         {
             id = "LaserLength",
             icon = CardSprites[5],
-            effect = () => pc.LaserLength += 3f,
+            effect = () => pc.LaserLength += 0.2f,
             canAppear = () => pc.Laser
         });
         allCards.Add(new BonusCard

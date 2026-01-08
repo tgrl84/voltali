@@ -18,7 +18,10 @@ public class EndGame : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(StopGame());
+        if (other.tag == "Player")
+        {
+            StartCoroutine(StopGame());
+        }
     }
     // Update is called once per frame
     IEnumerator StopGame()

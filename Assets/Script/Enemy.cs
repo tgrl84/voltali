@@ -45,7 +45,13 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Bullet")
+        if (playerController.Laser && other.gameObject.tag == "Bullet")
+        {
+            Debug.Log("hit !");
+            takeDamage(playerController.dmg * playerController.multiplier * playerController.multicount /5);
+            playerController.multiplier = 1f;
+        }
+        else if (other.gameObject.tag == "Bullet")
         {
             Debug.Log("hit !");
             takeDamage(playerController.dmg * playerController.multiplier * playerController.multicount);
