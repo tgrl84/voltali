@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CommonEnemy : Enemy
 {
+    public Animator animator;
     public GameObject bulletPrefab;
     public float maxDist;
     public float moveSpeed = 5f; // Vitesse de déplacement
@@ -23,10 +24,12 @@ public class CommonEnemy : Enemy
         {
             Vector3 direction = playerController.transform.position - transform.position;
             var look = Quaternion.LookRotation(direction);
+          
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, look);
             Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
             if (bulletRb != null)
                 bulletRb.linearVelocity = bullet.transform.forward * bulletSpeed;
+            transform.LookAt(playerController.transform);
         }
         StartCoroutine(ShootIntervale(1));
     }
@@ -121,7 +124,9 @@ public class CommonEnemy : Enemy
         }
 
         // Appliquer la vélocité directement (pas AddForce qui accumule)
+        animator.SetFloat("Walk", Mathf.Clamp01(direction.sqrMagnitude * moveSpeed));
         rb.linearVelocity = direction * moveSpeed * speedMultiplier;
+        transform.LookAt(playerController.transform);
     }
 
     public override void Attack()

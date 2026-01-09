@@ -8,4 +8,490 @@ AvatarMask:
   m_PrefabAsset: {fileID: 0}
   m_Name: CowBoyAvatarMask
   m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-  m_Elements: []
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/Elbow_L
+    m_Weight: 0
+  - m_Path: Armature/Elbow_L/Elbow_L_end
+    m_Weight: 0
+  - m_Path: Armature/Elbow_R
+    m_Weight: 0
+  - m_Path: Armature/Elbow_R/Elbow_R_end
+    m_Weight: 0
+  - m_Path: Armature/FootIK_L
+    m_Weight: 0
+  - m_Path: Armature/FootIK_L/FootIK_L_end
+    m_Weight: 0
+  - m_Path: Armature/FootIK_R
+    m_Weight: 0
+  - m_Path: Armature/FootIK_R/FootIK_R_end
+    m_Weight: 0
+  - m_Path: Armature/HandIK_L
+    m_Weight: 0
+  - m_Path: Armature/HandIK_L/HandIK_L_end
+    m_Weight: 0
+  - m_Path: Armature/HandIK_R
+    m_Weight: 0
+  - m_Path: Armature/HandIK_R/HandIK_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/NEck
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/NEck/Head
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/NEck/Head/Head_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L/Finger_L.001
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L/Finger_L.001/Finger_L.002
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L/Finger_L.001/Finger_L.002/Finger_L.003
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L/Finger_L.001/Finger_L.002/Finger_L.003/Finger_L.003_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.004
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.004/Finger_L.005
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.004/Finger_L.005/Finger_L.006
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.004/Finger_L.005/Finger_L.006/Finger_L.007
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.004/Finger_L.005/Finger_L.006/Finger_L.007/Finger_L.007_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.008
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.008/Finger_L.009
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.008/Finger_L.009/Finger_L.010
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.008/Finger_L.009/Finger_L.010/Finger_L.011
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.008/Finger_L.009/Finger_L.010/Finger_L.011/Finger_L.011_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.012
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.012/Finger_L.013
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.012/Finger_L.013/Finger_L.014
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.012/Finger_L.013/Finger_L.014/Finger_L.015
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.012/Finger_L.013/Finger_L.014/Finger_L.015/Finger_L.015_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.016
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.016/Finger_L.017
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.016/Finger_L.017/Finger_L.018
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.016/Finger_L.017/Finger_L.018/Finger_L.019
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_L/Arm_L/Forearm_L/Hand_L/Finger_L.016/Finger_L.017/Finger_L.018/Finger_L.019/Finger_L.019_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_R/Arm_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_R/Arm_R/Forearm_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_R/Arm_R/Forearm_R/Hand_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/Chest/UpperChest/Shoulder_R/Arm_R/Forearm_R/Hand_R/Hand_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys/CoatBonesPhys.001
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys/CoatBonesPhys.001/CoatBonesPhys.002
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys/CoatBonesPhys.001/CoatBonesPhys.002/CoatBonesPhys.003
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys/CoatBonesPhys.001/CoatBonesPhys.002/CoatBonesPhys.003/CoatBonesPhys.004
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys/CoatBonesPhys.001/CoatBonesPhys.002/CoatBonesPhys.003/CoatBonesPhys.004/CoatBonesPhys.004_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.005_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.005_L/CoatBonesPhys.006_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.005_L/CoatBonesPhys.006_L/CoatBonesPhys.007_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.005_L/CoatBonesPhys.006_L/CoatBonesPhys.007_L/CoatBonesPhys.008_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.005_L/CoatBonesPhys.006_L/CoatBonesPhys.007_L/CoatBonesPhys.008_L/CoatBonesPhys.010_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.005_L/CoatBonesPhys.006_L/CoatBonesPhys.007_L/CoatBonesPhys.008_L/CoatBonesPhys.010_L/CoatBonesPhys.010_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.005_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.005_R/CoatBonesPhys.006_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.005_R/CoatBonesPhys.006_R/CoatBonesPhys.007_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.005_R/CoatBonesPhys.006_R/CoatBonesPhys.007_R/CoatBonesPhys.008_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.005_R/CoatBonesPhys.006_R/CoatBonesPhys.007_R/CoatBonesPhys.008_R/CoatBonesPhys.010_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.005_R/CoatBonesPhys.006_R/CoatBonesPhys.007_R/CoatBonesPhys.008_R/CoatBonesPhys.010_R/CoatBonesPhys.010_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.009_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.009_L/CoatBonesPhys.011_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.009_L/CoatBonesPhys.011_L/CoatBonesPhys.012_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.009_L/CoatBonesPhys.011_L/CoatBonesPhys.012_L/CoatBonesPhys.013_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.009_L/CoatBonesPhys.011_L/CoatBonesPhys.012_L/CoatBonesPhys.013_L/CoatBonesPhys.014_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.009_L/CoatBonesPhys.011_L/CoatBonesPhys.012_L/CoatBonesPhys.013_L/CoatBonesPhys.014_L/CoatBonesPhys.014_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.009_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.009_R/CoatBonesPhys.011_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.009_R/CoatBonesPhys.011_R/CoatBonesPhys.012_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.009_R/CoatBonesPhys.011_R/CoatBonesPhys.012_R/CoatBonesPhys.013_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.009_R/CoatBonesPhys.011_R/CoatBonesPhys.012_R/CoatBonesPhys.013_R/CoatBonesPhys.014_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.009_R/CoatBonesPhys.011_R/CoatBonesPhys.012_R/CoatBonesPhys.013_R/CoatBonesPhys.014_R/CoatBonesPhys.014_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.015_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.015_L/CoatBonesPhys.016_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.015_L/CoatBonesPhys.016_L/CoatBonesPhys.017_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.015_L/CoatBonesPhys.016_L/CoatBonesPhys.017_L/CoatBonesPhys.018_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.015_L/CoatBonesPhys.016_L/CoatBonesPhys.017_L/CoatBonesPhys.018_L/CoatBonesPhys.019_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.015_L/CoatBonesPhys.016_L/CoatBonesPhys.017_L/CoatBonesPhys.018_L/CoatBonesPhys.019_L/CoatBonesPhys.019_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.015_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.015_R/CoatBonesPhys.016_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.015_R/CoatBonesPhys.016_R/CoatBonesPhys.017_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.015_R/CoatBonesPhys.016_R/CoatBonesPhys.017_R/CoatBonesPhys.018_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.015_R/CoatBonesPhys.016_R/CoatBonesPhys.017_R/CoatBonesPhys.018_R/CoatBonesPhys.019_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.015_R/CoatBonesPhys.016_R/CoatBonesPhys.017_R/CoatBonesPhys.018_R/CoatBonesPhys.019_R/CoatBonesPhys.019_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.020_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.020_L/CoatBonesPhys.021_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.020_L/CoatBonesPhys.021_L/CoatBonesPhys.022_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.020_L/CoatBonesPhys.021_L/CoatBonesPhys.022_L/CoatBonesPhys.023_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.020_L/CoatBonesPhys.021_L/CoatBonesPhys.022_L/CoatBonesPhys.023_L/CoatBonesPhys.024_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.020_L/CoatBonesPhys.021_L/CoatBonesPhys.022_L/CoatBonesPhys.023_L/CoatBonesPhys.024_L/CoatBonesPhys.024_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.020_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.020_R/CoatBonesPhys.021_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.020_R/CoatBonesPhys.021_R/CoatBonesPhys.022_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.020_R/CoatBonesPhys.021_R/CoatBonesPhys.022_R/CoatBonesPhys.023_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.020_R/CoatBonesPhys.021_R/CoatBonesPhys.022_R/CoatBonesPhys.023_R/CoatBonesPhys.024_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.020_R/CoatBonesPhys.021_R/CoatBonesPhys.022_R/CoatBonesPhys.023_R/CoatBonesPhys.024_R/CoatBonesPhys.024_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.025_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.025_L/CoatBonesPhys.026_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.025_L/CoatBonesPhys.026_L/CoatBonesPhys.027_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.025_L/CoatBonesPhys.026_L/CoatBonesPhys.027_L/CoatBonesPhys.028_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.025_L/CoatBonesPhys.026_L/CoatBonesPhys.027_L/CoatBonesPhys.028_L/CoatBonesPhys.029_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.025_L/CoatBonesPhys.026_L/CoatBonesPhys.027_L/CoatBonesPhys.028_L/CoatBonesPhys.029_L/CoatBonesPhys.029_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.025_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.025_R/CoatBonesPhys.026_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.025_R/CoatBonesPhys.026_R/CoatBonesPhys.027_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.025_R/CoatBonesPhys.026_R/CoatBonesPhys.027_R/CoatBonesPhys.028_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.025_R/CoatBonesPhys.026_R/CoatBonesPhys.027_R/CoatBonesPhys.028_R/CoatBonesPhys.029_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.025_R/CoatBonesPhys.026_R/CoatBonesPhys.027_R/CoatBonesPhys.028_R/CoatBonesPhys.029_R/CoatBonesPhys.029_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.030_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.030_L/CoatBonesPhys.031_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.030_L/CoatBonesPhys.031_L/CoatBonesPhys.032_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.030_L/CoatBonesPhys.031_L/CoatBonesPhys.032_L/CoatBonesPhys.033_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.030_L/CoatBonesPhys.031_L/CoatBonesPhys.032_L/CoatBonesPhys.033_L/CoatBonesPhys.034_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.030_L/CoatBonesPhys.031_L/CoatBonesPhys.032_L/CoatBonesPhys.033_L/CoatBonesPhys.034_L/CoatBonesPhys.034_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.030_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.030_R/CoatBonesPhys.031_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.030_R/CoatBonesPhys.031_R/CoatBonesPhys.032_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.030_R/CoatBonesPhys.031_R/CoatBonesPhys.032_R/CoatBonesPhys.033_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.030_R/CoatBonesPhys.031_R/CoatBonesPhys.032_R/CoatBonesPhys.033_R/CoatBonesPhys.034_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.030_R/CoatBonesPhys.031_R/CoatBonesPhys.032_R/CoatBonesPhys.033_R/CoatBonesPhys.034_R/CoatBonesPhys.034_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.035_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.035_L/CoatBonesPhys.036_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.035_L/CoatBonesPhys.036_L/CoatBonesPhys.037_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.035_L/CoatBonesPhys.036_L/CoatBonesPhys.037_L/CoatBonesPhys.038_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.035_L/CoatBonesPhys.036_L/CoatBonesPhys.037_L/CoatBonesPhys.038_L/CoatBonesPhys.039_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.035_L/CoatBonesPhys.036_L/CoatBonesPhys.037_L/CoatBonesPhys.038_L/CoatBonesPhys.039_L/CoatBonesPhys.039_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.035_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.035_R/CoatBonesPhys.036_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.035_R/CoatBonesPhys.036_R/CoatBonesPhys.037_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.035_R/CoatBonesPhys.036_R/CoatBonesPhys.037_R/CoatBonesPhys.038_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.035_R/CoatBonesPhys.036_R/CoatBonesPhys.037_R/CoatBonesPhys.038_R/CoatBonesPhys.039_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.035_R/CoatBonesPhys.036_R/CoatBonesPhys.037_R/CoatBonesPhys.038_R/CoatBonesPhys.039_R/CoatBonesPhys.039_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.040_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.040_L/CoatBonesPhys.041_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.040_L/CoatBonesPhys.041_L/CoatBonesPhys.042_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.040_L/CoatBonesPhys.041_L/CoatBonesPhys.042_L/CoatBonesPhys.043_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.040_L/CoatBonesPhys.041_L/CoatBonesPhys.042_L/CoatBonesPhys.043_L/CoatBonesPhys.044_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.040_L/CoatBonesPhys.041_L/CoatBonesPhys.042_L/CoatBonesPhys.043_L/CoatBonesPhys.044_L/CoatBonesPhys.044_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.040_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.040_R/CoatBonesPhys.041_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.040_R/CoatBonesPhys.041_R/CoatBonesPhys.042_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.040_R/CoatBonesPhys.041_R/CoatBonesPhys.042_R/CoatBonesPhys.043_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.040_R/CoatBonesPhys.041_R/CoatBonesPhys.042_R/CoatBonesPhys.043_R/CoatBonesPhys.044_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.040_R/CoatBonesPhys.041_R/CoatBonesPhys.042_R/CoatBonesPhys.043_R/CoatBonesPhys.044_R/CoatBonesPhys.044_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.045_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.045_L/CoatBonesPhys.046_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.045_L/CoatBonesPhys.046_L/CoatBonesPhys.047_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.045_L/CoatBonesPhys.046_L/CoatBonesPhys.047_L/CoatBonesPhys.048_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.045_L/CoatBonesPhys.046_L/CoatBonesPhys.047_L/CoatBonesPhys.048_L/CoatBonesPhys.049_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.045_L/CoatBonesPhys.046_L/CoatBonesPhys.047_L/CoatBonesPhys.048_L/CoatBonesPhys.049_L/CoatBonesPhys.049_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.045_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.045_R/CoatBonesPhys.046_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.045_R/CoatBonesPhys.046_R/CoatBonesPhys.047_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.045_R/CoatBonesPhys.046_R/CoatBonesPhys.047_R/CoatBonesPhys.048_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.045_R/CoatBonesPhys.046_R/CoatBonesPhys.047_R/CoatBonesPhys.048_R/CoatBonesPhys.049_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.045_R/CoatBonesPhys.046_R/CoatBonesPhys.047_R/CoatBonesPhys.048_R/CoatBonesPhys.049_R/CoatBonesPhys.049_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.050_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.050_L/CoatBonesPhys.051_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.050_L/CoatBonesPhys.051_L/CoatBonesPhys.052_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.050_L/CoatBonesPhys.051_L/CoatBonesPhys.052_L/CoatBonesPhys.053_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.050_L/CoatBonesPhys.051_L/CoatBonesPhys.052_L/CoatBonesPhys.053_L/CoatBonesPhys.054_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.050_L/CoatBonesPhys.051_L/CoatBonesPhys.052_L/CoatBonesPhys.053_L/CoatBonesPhys.054_L/CoatBonesPhys.054_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.050_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.050_R/CoatBonesPhys.051_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.050_R/CoatBonesPhys.051_R/CoatBonesPhys.052_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.050_R/CoatBonesPhys.051_R/CoatBonesPhys.052_R/CoatBonesPhys.053_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.050_R/CoatBonesPhys.051_R/CoatBonesPhys.052_R/CoatBonesPhys.053_R/CoatBonesPhys.054_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.050_R/CoatBonesPhys.051_R/CoatBonesPhys.052_R/CoatBonesPhys.053_R/CoatBonesPhys.054_R/CoatBonesPhys.054_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.055_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.055_L/CoatBonesPhys.056_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.055_L/CoatBonesPhys.056_L/CoatBonesPhys.057_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.055_L/CoatBonesPhys.056_L/CoatBonesPhys.057_L/CoatBonesPhys.058_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.055_L/CoatBonesPhys.056_L/CoatBonesPhys.057_L/CoatBonesPhys.058_L/CoatBonesPhys.059_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.055_L/CoatBonesPhys.056_L/CoatBonesPhys.057_L/CoatBonesPhys.058_L/CoatBonesPhys.059_L/CoatBonesPhys.059_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.055_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.055_R/CoatBonesPhys.056_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.055_R/CoatBonesPhys.056_R/CoatBonesPhys.057_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.055_R/CoatBonesPhys.056_R/CoatBonesPhys.057_R/CoatBonesPhys.058_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.055_R/CoatBonesPhys.056_R/CoatBonesPhys.057_R/CoatBonesPhys.058_R/CoatBonesPhys.059_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.055_R/CoatBonesPhys.056_R/CoatBonesPhys.057_R/CoatBonesPhys.058_R/CoatBonesPhys.059_R/CoatBonesPhys.059_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.060_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.060_L/CoatBonesPhys.061_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.060_L/CoatBonesPhys.061_L/CoatBonesPhys.062_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.060_L/CoatBonesPhys.061_L/CoatBonesPhys.062_L/CoatBonesPhys.063_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.060_L/CoatBonesPhys.061_L/CoatBonesPhys.062_L/CoatBonesPhys.063_L/CoatBonesPhys.064_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.060_L/CoatBonesPhys.061_L/CoatBonesPhys.062_L/CoatBonesPhys.063_L/CoatBonesPhys.064_L/CoatBonesPhys.064_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.060_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.060_R/CoatBonesPhys.061_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.060_R/CoatBonesPhys.061_R/CoatBonesPhys.062_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.060_R/CoatBonesPhys.061_R/CoatBonesPhys.062_R/CoatBonesPhys.063_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.060_R/CoatBonesPhys.061_R/CoatBonesPhys.062_R/CoatBonesPhys.063_R/CoatBonesPhys.064_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.060_R/CoatBonesPhys.061_R/CoatBonesPhys.062_R/CoatBonesPhys.063_R/CoatBonesPhys.064_R/CoatBonesPhys.064_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.065_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.065_L/CoatBonesPhys.066_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.065_L/CoatBonesPhys.066_L/CoatBonesPhys.067_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.065_L/CoatBonesPhys.066_L/CoatBonesPhys.067_L/CoatBonesPhys.068_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.065_L/CoatBonesPhys.066_L/CoatBonesPhys.067_L/CoatBonesPhys.068_L/CoatBonesPhys.069_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.065_L/CoatBonesPhys.066_L/CoatBonesPhys.067_L/CoatBonesPhys.068_L/CoatBonesPhys.069_L/CoatBonesPhys.069_L_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.065_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.065_R/CoatBonesPhys.066_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.065_R/CoatBonesPhys.066_R/CoatBonesPhys.067_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.065_R/CoatBonesPhys.066_R/CoatBonesPhys.067_R/CoatBonesPhys.068_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.065_R/CoatBonesPhys.066_R/CoatBonesPhys.067_R/CoatBonesPhys.068_R/CoatBonesPhys.069_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/CoatRoot/CoatBonesPhys.065_R/CoatBonesPhys.066_R/CoatBonesPhys.067_R/CoatBonesPhys.068_R/CoatBonesPhys.069_R/CoatBonesPhys.069_R_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/Leg_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/Leg_L/Leg_L.001
+    m_Weight: 0
+  - m_Path: Armature/Hips/Leg_L/Leg_L.001/Foot_L
+    m_Weight: 0
+  - m_Path: Armature/Hips/Leg_L/Leg_L.001/Foot_L/Foot_L.001
+    m_Weight: 0
+  - m_Path: Armature/Hips/Leg_L/Leg_L.001/Foot_L/Foot_L.001/Foot_L.002
+    m_Weight: 0
+  - m_Path: Armature/Hips/Leg_L/Leg_L.001/Foot_L/Foot_L.001/Foot_L.002/Foot_L.002_end
+    m_Weight: 0
+  - m_Path: Armature/Hips/Leg_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/Leg_R/Leg_R.001
+    m_Weight: 0
+  - m_Path: Armature/Hips/Leg_R/Leg_R.001/Foot_R
+    m_Weight: 0
+  - m_Path: Armature/Hips/Leg_R/Leg_R.001/Foot_R/Foot_R.001
+    m_Weight: 0
+  - m_Path: Armature/Hips/Leg_R/Leg_R.001/Foot_R/Foot_R.001/Foot_R.002
+    m_Weight: 0
+  - m_Path: Armature/Hips/Leg_R/Leg_R.001/Foot_R/Foot_R.001/Foot_R.002/Foot_R.002_end
+    m_Weight: 0
+  - m_Path: Armature/KneeIK_L
+    m_Weight: 0
+  - m_Path: Armature/KneeIK_L/KneeIK_L_end
+    m_Weight: 0
+  - m_Path: Armature/KneeIK_R
+    m_Weight: 0
+  - m_Path: Armature/KneeIK_R/KneeIK_R_end
+    m_Weight: 0
+  - m_Path: BalleTruc
+    m_Weight: 0
+  - m_Path: Bandana
+    m_Weight: 0
+  - m_Path: "B\xE9zierCircle"
+    m_Weight: 0
+  - m_Path: Chalumeau
+    m_Weight: 0
+  - m_Path: Chalumeau.001
+    m_Weight: 0
+  - m_Path: Coat
+    m_Weight: 0
+  - m_Path: Corps
+    m_Weight: 0
+  - m_Path: Gilet
+    m_Weight: 0
+  - m_Path: Jambes
+    m_Weight: 0
+  - m_Path: SaGrosseTete
+    m_Weight: 0
