@@ -47,7 +47,7 @@ public class CommonEnemy : Enemy
             rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         }
         
-        scoreValue = 30; // Score pour CommonEnemy
+        scoreValue = 20; // Score pour CommonEnemy
     }
 
     private void Start()

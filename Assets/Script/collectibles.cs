@@ -11,8 +11,12 @@ public class Collectibles : MonoBehaviour
         if (player != null && other.tag=="Player")
         {
             // Ajoute du steel au joueur
-            player.nbSteel++;
+            if (player.nbSteel < 3) {
 
+                player.nbSteel++;
+                
+            }
+            HudController.Instance.HPPannel.updatePlayerSteelsAddUI(player.nbSteel);
             // Détruit le collectible après collecte
             Destroy(gameObject);
         }
