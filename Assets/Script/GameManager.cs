@@ -623,6 +623,5 @@ public class GameManager : MonoBehaviour
         GameOver.SetActive(true);
         yield return new WaitForSeconds(1.2f);
         SceneManager.LoadScene("Menu");
-        yield return new WaitForSeconds(1.2f);
     }
 }
